@@ -2,6 +2,7 @@ import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@c
 import './globals.css'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import type { Metadata } from 'next'
+import { ThemeProvider } from '@/context/ThemeProvider'
 
 export const metadata: Metadata = {
   title: "Next.js 14",
@@ -39,7 +40,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <UserButton />
             </SignedIn>
           </header> */}
+          <ThemeProvider>
           <main>{children}</main>
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
