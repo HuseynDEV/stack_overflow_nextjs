@@ -1,50 +1,33 @@
-import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+/* eslint-disable camelcase */
+import React from 'react'
+import { ClerkProvider } from '@clerk/nextjs'
+
 import './globals.css'
-import { Inter, Space_Grotesk } from 'next/font/google'
-import type { Metadata } from 'next'
-import { ThemeProvider } from '@/context/ThemeProvider'
-
-export const metadata: Metadata = {
-  title: "Next.js 14",
-  description: "lorem ipsum dolar amet",
-  icons: {
-    icon: '/assets/images/site-logo.svg '
-  }
-}
-
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-inter'
-})
+import { ThemeProvider } from '@/context/ThemeProvider';
 
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-spaceGrotesk'
-})
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <h1 className='h1-bold'>This is a piece</h1>
-        <body className={`${inter.variable} ${spaceGrotesk.variable} `}>
-          {/* <body>
-          <header>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </header> */}
+    <html lang="en">
+      <body >
+        <ClerkProvider
+          appearance={{
+            elements: {
+              formButtonPrimary: 'primary-gradient',
+              footerActionLink: 'primary-text-gradient hover:text-primary-500'
+            }
+          }}
+        >
           <ThemeProvider>
-          <main>{children}</main>
+            {children}
           </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   )
 }
